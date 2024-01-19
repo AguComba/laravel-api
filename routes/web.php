@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return ['Laravel' => app()->version()];
+    return "Agu pichon de ping pong";
 });
 
-require __DIR__.'/auth.php';
