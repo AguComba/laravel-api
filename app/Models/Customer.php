@@ -16,8 +16,16 @@ class Customer extends Model implements Authenticatable
     protected $table = "user_customer";
 
     protected $fillable = [
-        'password'
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'date_input',
     ];
 
     public $timestamps = false;
+
+    protected $hidden = [
+        'password'
+    ];
 }

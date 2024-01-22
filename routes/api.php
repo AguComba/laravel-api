@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,18 @@ use App\Http\Controllers\PruebaController;
 */
 //Para ver el listado de rutas habilitadas usar en terminal -> php artisan route:list
 Route::post("/login", [LoginController::class, "login"]);
+Route::post("/register", [LoginController::class, "register"]);
 
-Route::apiResources([
-    'pruebas' => PruebaController::class,
-    'customer' => CustomerController::class
-]);
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::apiResource('customer', CustomerController::class);
 //Rutas que requieren autorizacion 
 Route::middleware('auth:sanctum')->group(function() {
+    Route::apiResources([
+        'pruebas' => PruebaController::class,
+      //  'customer' => CustomerController::class,
+        'test' => TestController::class
+    ]);
 });
